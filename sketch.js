@@ -13,7 +13,7 @@ let DIM = Math.min(WIDTH, HEIGHT);
 let tokenData = genTokenData(299);
 let tkid = tokenData.tokenId;
 let seed = parseInt(tokenData.hash.slice(0, 16), 16)
-let R, fg, forms = [], bgCol, wid
+let R, fg, forms = [], bgCol, wid, gCol1 = '', gCol2 = '';
 
 function setup() {
     createCanvas(DIM, DIM);
@@ -40,6 +40,11 @@ function init() {
     let rdf = R.random_int(0, 3);
     if (rdf >= 1) {
         rdmFm1 = R.random_int(0, 6);
+        if (rdmFm1 >= 5) {
+            let auxpal = R.random_choice(paleta)
+            gCol1 = auxpal[R.random_int(0, 10)]
+            gCol2 = auxpal[R.random_int(0, 10)]
+        }
         addForms();
     } else {
         rdmFm2 = R.random_int(0, 2);
@@ -263,29 +268,36 @@ function shape(x, y, w) {
     let col2;
     let col3;
     let col4;
-    if (tkid % 2 == 0) {
-        col1 = R.random_choice(paleta[3]);
-        col2 = R.random_choice(paleta[1]);
-        col3 = R.random_choice(paleta[2]);
-        col4 = R.random_choice(paleta[6]);
-    } else if (tkid % 5 == 0) {
-        arrcol = R.random_choice(paleta);
-        if (R.random_int(0, 1) == 0) {
-            col1 = arrcol[0];
-            col2 = arrcol[1];
-            col3 = arrcol[2];
-            col4 = arrcol[3];
+    if (gCol1 == '' && gCol2 == '') {
+        if (tkid % 2 == 0) {
+            col1 = R.random_choice(paleta[3]);
+            col2 = R.random_choice(paleta[1]);
+            col3 = R.random_choice(paleta[2]);
+            col4 = R.random_choice(paleta[6]);
+        } else if (tkid % 5 == 0) {
+            arrcol = R.random_choice(paleta);
+            if (R.random_int(0, 1) == 0) {
+                col1 = arrcol[0];
+                col2 = arrcol[1];
+                col3 = arrcol[2];
+                col4 = arrcol[3];
+            } else {
+                col1 = arrcol[7];
+                col2 = arrcol[8];
+                col3 = arrcol[9];
+                col4 = arrcol[10];
+            }
         } else {
-            col1 = arrcol[7];
-            col2 = arrcol[8];
-            col3 = arrcol[9];
-            col4 = arrcol[10];
+            col1 = R.random_choice(paleta[0]);
+            col2 = R.random_choice(paleta[4]);
+            col3 = R.random_choice(paleta[6]);
+            col4 = R.random_choice(paleta[5]);
         }
     } else {
-        col1 = R.random_choice(paleta[0]);
-        col2 = R.random_choice(paleta[4]);
-        col3 = R.random_choice(paleta[6]);
-        col4 = R.random_choice(paleta[5]);
+        col1 = gCol1;
+        col2 = gCol2;
+        col3 = R.random_choice(paleta[0]);
+        col4 = R.random_choice(paleta[1]);
     }
     for (let i = 0; i < nn; i++) {
         for (let j = 0; j < nn; j++) {
