@@ -41,7 +41,6 @@ function init() {
     if (rdf >= 1) {
         rdmFm1 = R.random_int(0, 6);
         addForms();
-        console.log(tkid);
     } else {
         rdmFm2 = R.random_int(0, 2);
         rdmFm2b = R.random_int(0, 5);
@@ -196,7 +195,7 @@ class LineMove2 {
     move() {
         if (this.t > 0) {
             if (this.rnd == 0) {
-                this.a = lerp(this.a0, this.a1, easeInOutQuad(this.t));
+                this.a = lerp(this.a0, this.a1, easeInOutQuadX(this.t));
             }
         }
         this.t += this.step;
@@ -407,7 +406,7 @@ function shape(x, y, w) {
     }
 }
 
-function easeInOutQuad(x) {
+function easeInOutQuadX(x) {
 	return x < 0.5 ? 2 * x * x : 1 - pow(-2 * x + 2, 2) / 2;
 }
 
@@ -480,7 +479,7 @@ class LineMove {
 	move() {
 		if (this.t > 0) {
             if (this.rnd == 0) {
-				this.a = lerp(this.a0, this.a1, easeInOutQuad(this.t));
+				this.a = lerp(this.a0, this.a1, easeInOutQuadX(this.t));
 			}
 		}
 		this.t += this.step;
@@ -623,7 +622,7 @@ class RectMove {
 
     move() {
         if (this.t > 0) {
-           this.a = lerp(this.a0, this.a1, easeInOutQuad(this.t));
+           this.a = lerp(this.a0, this.a1, easeInOutQuadX(this.t));
         }
         this.t += this.step;
         if (this.t >= 1) {
