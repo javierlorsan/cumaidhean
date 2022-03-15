@@ -131,7 +131,7 @@ class LineMove2 {
         this.y = y;
         this.w = w;
         this.a = int(random(4)) * PI * 0.5;
-        this.l = int(random(2)) * this.w * 1.8;
+        this.l = this.w;
         this.init();
         this.col = col;
         this.stw = stw;
@@ -148,10 +148,10 @@ class LineMove2 {
         strokeWeight(this.stw);
         if (rdmFm2b <= 3) {
             if (this.nl < 6) {
-                line(0, 0, this.w, 0)
+                line(0, 0, this.l, 0)
             } else if (this.nl < 7) {
-                line(0, 0, this.w, 0)
-                line(0, -this.w, 0, 0);
+                line(0, 0, this.l, 0)
+                line(0, -this.l, 0, 0);
             } else if (this.nl < 8) {
                 line(0, 0, this.w, 0)
                 line(this.w, -this.w, this.w, 0);
@@ -164,10 +164,10 @@ class LineMove2 {
             }
         } else if (rdmFm2b == 4) {
             if (this.nl < 6) {
-                line(0, 0, this.w, 0)
+                line(0, 0, this.l, 0)
             } else if (this.nl < 7) {
-                line(0, 0, this.w, 0)
-                line(0, -this.w, 0, 0);
+                line(0, 0, this.l, 0)
+                line(0, -this.l, 0, 0);
             } else if (this.nl < 8) {
                 line(0, 0, this.w, 0)
                 line(0, -this.w, this.w, 0);
@@ -180,12 +180,12 @@ class LineMove2 {
             }
         } else {
             if (this.nl < 6) {
-                line(0, 0, this.w, 0)
+                line(0, 0, this.l, 0)
             } else if (this.nl < 7) {
-                line(0, 0, this.w, 0)
+                line(0, 0, this.l, 0)
                 line(0, this.w, -this.w, 0);
             } else if (this.nl < 8) {
-                line(0, 0, this.w, 0)
+                line(0, 0, this.l, 0)
                 line(this.w, -this.w, this.w, 0);
             } else if (this.nl < 9) {
                 noFill();
@@ -202,7 +202,9 @@ class LineMove2 {
     move() {
         if (this.t > 0) {
             if (this.rnd == 0) {
-                this.a = lerp(this.a0, this.a1, easeInOutQuadX(this.t));
+                this.a = lerp(this.a0, this.a1, EIOline(this.t));
+            } else if (this.rnd == 1) {
+                this.l = lerp(this.l0, this.l1, EIOline(this.t));
             }
         }
         this.t += this.step;
@@ -420,7 +422,7 @@ function shape(x, y, w) {
     }
 }
 
-function easeInOutQuadX(x) {
+function EIOline(x) {
 	return x < 0.5 ? 2 * x * x : 1 - pow(-2 * x + 2, 2) / 2;
 }
 
@@ -430,7 +432,7 @@ class LineMove {
 		this.y = y;
 		this.w = w;
 		this.a = int(random(4)) * PI * 0.5;
-		this.l = int(random(2)) * this.w * 1.8;
+		this.l = this.w;
 		this.init();
         this.col = col;
         this.stw = stw;
@@ -447,20 +449,20 @@ class LineMove {
 
         if (rdmFm1 <= 1) {
             if (this.nl < 7) {
-                line(0, 0, this.w, 0)
+                line(0, 0, this.l, 0)
             } else if (this.nl < 8) {
-                line(0, 0, this.w, 0)
+                line(0, 0, this.l, 0)
             } else if (this.nl < 9) {
-                line(0, 0, this.w, 0)
+                line(0, 0, this.l, 0)
             } else {
                 if (int(this.w) > 20) { triangle(0, -this.w * 0.4, this.w * 0.25, 0, -this.w * 0.25, 0); }
                 else {line(0, -this.w, 0, 0, )}
             }
         } else if (rdmFm1 == 2) {
             if (this.nl < 7) {
-                line(0, 0, this.w, 0)
+                line(0, 0, this.l, 0)
             } else if (this.nl < 8) {
-                line(0, 0, this.w, 0)
+                line(0, 0, this.l, 0)
                 line(0, -this.w, 0, 0);
             } else if (this.nl < 9) {
                 noFill();
@@ -473,9 +475,9 @@ class LineMove {
             }
         } else {
             if (this.nl < 7) {
-                line(0, 0, -this.w, 0)
+                line(0, 0, -this.l, 0)
             } else if (this.nl < 8) {
-                line(0, 0, this.w, 0)
+                line(0, 0, this.l, 0)
             } else if (this.nl < 9) {
                 line(0, -this.w, this.w, 0);
             } else {
@@ -493,7 +495,9 @@ class LineMove {
 	move() {
 		if (this.t > 0) {
             if (this.rnd == 0) {
-				this.a = lerp(this.a0, this.a1, easeInOutQuadX(this.t));
+                this.a = lerp(this.a0, this.a1, EIOline(this.t));
+            } else if (this.rnd == 1) {
+                this.l = lerp(this.l0, this.l1, EIOline(this.t));
 			}
 		}
 		this.t += this.step;
@@ -636,7 +640,7 @@ class RectMove {
 
     move() {
         if (this.t > 0) {
-           this.a = lerp(this.a0, this.a1, easeInOutQuadX(this.t));
+           this.a = lerp(this.a0, this.a1, EIOline(this.t));
         }
         this.t += this.step;
         if (this.t >= 1) {
