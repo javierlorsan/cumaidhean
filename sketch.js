@@ -42,7 +42,7 @@ function init() {
         rdmFm1 = R.random_int(0, 6);
         let rdcol = R.random_int(0, 7);
         console.log(rdmFm1 + ' - ' + rdcol);
-        if ( rdcol >= 5) {
+        if ( rdcol >= 4) {
             let auxpal = R.random_choice(paleta)
             gCol1 = auxpal[R.random_int(0, 10)]
             gCol2 = auxpal[R.random_int(0, 10)]
