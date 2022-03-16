@@ -1,11 +1,11 @@
 let colors2 = ["#C61D34", "#EFD7B3", "#580D14", "#F42444", "#4C1F22", "#1F1715", "#86663F", "#BD9F7A", "#5C5958", "#A0121B", "#C70A27"]; //cheesecake
 let colors1 = ["#004E65", "#136E80", "#5E8886", "#EA9F42", "#FFDEBB", "#6F5B50", "#F6AA07", "#426974", "#1EA7C2", "#9BC5C3", "#F88C06"]; //sunrise
 let colors = ["#FD0D00", "#A50301", "#4D0101", "#6E8104", "#173008", "#FFC000", "#C2C8D4", "#9FA3AD", "#F8D56B", "#2F4D1D", "#A0BC04"]; //poopy
-let colors3 = ["#36025F", "#8C32CA", "#DA2DAE", "#FF95FF", "#FF1F3C", "#6272DD", "#A0D100", "#6A06B9", "#B049F7", "#F807BB", "#711171"]; //pcordobes
+let colors3 = ["#36025F", "#8C32CA", "#DA2DAE", "#FF95FF", "#FF1F3C", "#919BDE", "#A0D100", "#6A06B9", "#B049F7", "#F807BB", "#711171"]; //pcordobes
 let colors4 = ["#e9ecef", "#dee2e6", "#ced4da", "#adb5bd", "#6c757d", "#d4d700", "#9ef01a", "#C7EC8C", "#F6F905", "#9FA2A5", "#CBCFD3"]; //blue/gray
 let colors5 = ["#f94144", "#f3722c", "#f8961e", "#f9c74f", "#90be6d", "#43aa8b", "#577590", "#D43739", "#FD5A01", "#D37604", "#3F6B1D" ]; // Multicol
 let colors6 = ["#d8f3dc", "#b7e4c7", "#95d5b2", "#74c69d", "#52b788", "#40916c", "#2d6a4f", "#0C6A40", "#5A9077", "#5FD49D", "#95C6AE"]; // green
-let fondo = ["#B6AD90", "#C2C5AA", "#A8DADC", "#CDB4DB", "#95D5B2", "#D8F3DC", "#FFBA08", "#582f0e", "#936639", "#4361ee", "#3a0ca3", "#ffafcc", "#9d4edd", "#ff4d6d", "#dab6fc", "#e07a5f", "#fdffb6", "#ffea00","#e5dcc5","#ffffff"];
+let fondo = ["#B6AD90", "#C2C5AA", "#A8DADC", "#CDB4DB", "#95D5B2", "#D8F3DC", "#FFBA08", "#582f0e", "#936639", "#4361ee", "#3a0ca3", "#ffafcc", "#9d4edd", "#ff4d6d", "#dab6fc", "#e07a5f", "#fdffb6", "#E7D405","#e5dcc5","#ffffff"];
 let paleta = [colors, colors1, colors2, colors3, colors4, colors5, colors6];
 let WIDTH = window.innerWidth;
 let HEIGHT = window.innerHeight;
@@ -41,8 +41,7 @@ function init() {
     if (rdf >= 1) {
         rdmFm1 = R.random_int(0, 6);
         let rdcol = R.random_int(0, 7);
-        console.log(rdmFm1 + ' - ' + rdcol);
-        if ( rdcol >= 4) {
+        if (rdcol >= 4) {
             let auxpal = R.random_choice(paleta)
             gCol1 = auxpal[R.random_int(0, 10)]
             gCol2 = auxpal[R.random_int(0, 10)]
@@ -446,6 +445,7 @@ class LineMove {
 		rotate(this.a);
         stroke(this.col);        
         strokeWeight(this.stw);
+        if (dstrd == 4 || dstrd == 7 || dstrd == 9) strokeWeight(dstrd);
 
         if (rdmFm1 <= 1) {
             if (this.nl < 7) {
