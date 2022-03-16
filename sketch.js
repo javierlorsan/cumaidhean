@@ -235,7 +235,8 @@ class Circulo2 {
         push();
         translate(this.x, this.y);
         noStroke();
-        fill(this.col);
+        if (dstrd == 2 || dstrd == 5 || dstrd == 7) { fill(this.col + '70'); }
+        else { fill(this.col); }
         circle(0, 0, this.w);
         pop();
     }
@@ -442,10 +443,10 @@ class LineMove {
         
         push();
         translate(this.x, this.y, this.w);
-		rotate(this.a);
-        stroke(this.col);        
+		rotate(this.a);        
         strokeWeight(this.stw);
-        if (dstrd == 4 || dstrd == 7 || dstrd == 9) strokeWeight(dstrd);
+        if (dstrd == 4 || dstrd == 7 || dstrd == 9) { stroke(this.col); strokeWeight(dstrd); }
+        else if (dstrd == 2 || dstrd == 5) { stroke(this.col + '70');}
 
         if (rdmFm1 <= 1) {
             if (this.nl < 7) {
@@ -556,7 +557,8 @@ class Elipse {
     show() {
         push();
         translate(this.x, this.y);
-        stroke(this.col);
+        if (dstrd == 1 || dstrd == 3) { stroke(this.col + '70'); }
+        else { stroke(this.col); }
         strokeWeight(this.stw);
         ellipse(0, 0, this.w, this.h);
         pop();
@@ -631,7 +633,8 @@ class RectMove {
         translate(this.x, this.y);
         rotate(this.a);
         fill(this.col);
-        stroke(this.col);
+        if (dstrd == 0 || dstrd == 6 || dstrd == 4) { stroke(this.col + '70'); }
+        else { stroke(this.col); }
         strokeWeight(this.stw);
         let sw = this.w;
         rect(0, 0, sw, sw, 0);
@@ -674,7 +677,8 @@ class RectStatic {
         translate(this.x, this.y);
         rotate(PI / 4.0);
         fill(this.col);
-        stroke(this.col);
+        if (dstrd == 0 || dstrd == 6 || dstrd == 9) { stroke(this.col + '70'); }
+        else { stroke(this.col); }
         strokeWeight(this.stw);
         let sw = this.w;
         rect(0, 0, sw, sw, 0);
