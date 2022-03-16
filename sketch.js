@@ -44,6 +44,7 @@ function init() {
         if (rdcol >= 4) {
             let auxpal = R.random_choice(paleta)
             gCol1 = auxpal[R.random_int(0, 10)]
+            //auxpal = R.random_choice(paleta)
             gCol2 = auxpal[R.random_int(0, 10)]
         }
         addForms();
@@ -446,7 +447,8 @@ class LineMove {
 		rotate(this.a);        
         strokeWeight(this.stw);
         if (dstrd == 4 || dstrd == 7 || dstrd == 9) { stroke(this.col); strokeWeight(dstrd); }
-        else if (dstrd == 2 || dstrd == 5) { stroke(this.col + '70');}
+        else if (dstrd == 2 || dstrd == 5) { stroke(this.col + '70'); }
+        else { stroke(this.col); }
 
         if (rdmFm1 <= 1) {
             if (this.nl < 7) {
@@ -632,9 +634,8 @@ class RectMove {
         push();
         translate(this.x, this.y);
         rotate(this.a);
-        fill(this.col);
-        if (dstrd == 0 || dstrd == 6 || dstrd == 4) { stroke(this.col + '70'); }
-        else { stroke(this.col); }
+        if (dstrd == 0 || dstrd == 6 || dstrd == 4) { stroke(this.col + '70'); fill(this.col + '70'); }
+        else { stroke(this.col); fill(this.col); }
         strokeWeight(this.stw);
         let sw = this.w;
         rect(0, 0, sw, sw, 0);
@@ -676,9 +677,8 @@ class RectStatic {
         push();
         translate(this.x, this.y);
         rotate(PI / 4.0);
-        fill(this.col);
-        if (dstrd == 0 || dstrd == 6 || dstrd == 9) { stroke(this.col + '70'); }
-        else { stroke(this.col); }
+        if (dstrd == 0 || dstrd == 6 || dstrd == 9) { stroke(this.col + '70'); fill(this.col + '70'); }
+        else { stroke(this.col); fill(this.col); }
         strokeWeight(this.stw);
         let sw = this.w;
         rect(0, 0, sw, sw, 0);
