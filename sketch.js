@@ -1,19 +1,21 @@
-let colors2 = ["#C61D34", "#EFD7B3", "#580D14", "#F42444", "#4C1F22", "#1F1715", "#86663F", "#BD9F7A", "#5C5958", "#A0121B", "#C70A27"]; //cheesecake
-let colors1 = ["#004E65", "#136E80", "#5E8886", "#EA9F42", "#FFDEBB", "#6F5B50", "#F6AA07", "#426974", "#1EA7C2", "#9BC5C3", "#F88C06"]; //sunrise
-let colors = ["#FD0D00", "#A50301", "#4D0101", "#6E8104", "#173008", "#FFC000", "#C2C8D4", "#9FA3AD", "#F8D56B", "#2F4D1D", "#A0BC04"]; //poopy
-let colors3 = ["#36025F", "#8C32CA", "#DA2DAE", "#FF95FF", "#FF1F3C", "#919BDE", "#A0D100", "#6A06B9", "#B049F7", "#F807BB", "#711171"]; //pcordobes
-let colors4 = ["#BFCAD5", "#dee2e6", "#ced4da", "#adb5bd", "#6c757d", "#d4d700", "#9ef01a", "#C7EC8C", "#F6F905", "#9FA2A5", "#CBCFD3"]; //blue/gray
-let colors5 = ["#f94144", "#f3722c", "#f8961e", "#f9c74f", "#90be6d", "#43aa8b", "#577590", "#D43739", "#FD5A01", "#D37604", "#3F6B1D" ]; // Multicol
-let colors6 = ["#d8f3dc", "#b7e4c7", "#95d5b2", "#74c69d", "#52b788", "#40916c", "#2d6a4f", "#0C6A40", "#5A9077", "#5FD49D", "#95C6AE"]; // green
+let colors2 = ["#C61D34", "#EFD7B3", "#580D14", "#F42444", "#4C1F22", "#1F1715", "#86663F", "#BD9F7A", "#5C5958", "#A0121B", "#C70A27", "#DCE6F2"]; //cheesecake
+let colors1 = ["#004E65", "#136E80", "#5E8886", "#EA9F42", "#FFDEBB", "#6F5B50", "#F6AA07", "#426974", "#1EA7C2", "#9BC5C3", "#F88C06", "#83A603"]; //sunrise
+let colors = ["#FD0D00", "#D90602", "#4D0101", "#6E8104", "#173008", "#FFC000", "#C2C8D4", "#9FA3AD", "#F8D56B", "#2F4D1D", "#A0BC04", "#BF6550"]; //poopy
+let colors3 = ["#36025F", "#8C32CA", "#DA2DAE", "#FF95FF", "#FF1F3C", "#919BDE", "#A0D100", "#6A06B9", "#B049F7", "#F807BB", "#711171", "#730217"]; //pcordobes
+let colors7 = ["#F23D91", "#F079F2", "#5F72D9", "#83A603", "#F22727", "#F241A3", "#F063F2", "#97BF04", "#F22222", "#F2F2F2", "#F1B3F2", "#4659C9"] //pcordobes2
+let colors4 = ["#BFCAD5", "#dee2e6", "#ced4da", "#adb5bd", "#6c757d", "#d4d700", "#9ef01a", "#C7EC8C", "#F6F905", "#9FA2A5", "#CBCFD3", "#280459"]; //blue/gray
+let colors5 = ["#f94144", "#f3722c", "#f8961e", "#f9c74f", "#90be6d", "#43aa8b", "#577590", "#D43739", "#FD5A01", "#D37604", "#3F6B1D", "#3C5911" ]; // Multicol
+let colors6 = ["#d8f3dc", "#b7e4c7", "#95d5b2", "#74c69d", "#52b788", "#40916c", "#2d6a4f", "#0C6A40", "#5A9077", "#5FD49D", "#95C6AE", "#83A603"]; // green
 let fondo = ["#D0A519", "#C2C5AA", "#D1F5F6", "#CDB4DB", "#D8F3DC", "#FD8A03", "#883E03", "#936639", "#4361ee", "#3a0ca3", "#F8C9DA", "#9d4edd", "#F992A5", "#dab6fc", "#DFAB8F", "#fdffb6","#e5dcc5","#ffffff"];
-let paleta = [colors, colors1, colors2, colors3, colors4, colors5, colors6];
+let paleta = [colors, colors1, colors2, colors3, colors4, colors5, colors6, colors7];
+let pltcols = colors.concat(colors1, colors2, colors3, colors4, colors5, colors6, colors7)
 let WIDTH = window.innerWidth;
 let HEIGHT = window.innerHeight;
 let DIM = Math.min(WIDTH, HEIGHT);
-let tokenData = genTokenData(299);
+let tokenData = genTokenData(357);
 let tkid = tokenData.tokenId;
 let seed = parseInt(tokenData.hash.slice(0, 16), 16)
-let R, fg, forms = [], bgCol, wid, gCol1 = '', gCol2 = '';
+let rdtc1, R, fg, forms = [], bgCol, wid, gCol1 = '', gCol2 = '';
 
 function setup() {
     createCanvas(DIM, DIM);
@@ -36,16 +38,17 @@ function draw() {
 
 function init() {
     bgCol = R.random_choice(fondo);
-    dstrd = R.random_int(0, 10);    
+    dstrd = R.random_int(0, 10);
+    rdtc1 = R.random_int(0, 1);
     let rdf = R.random_int(0, 3);
     if (rdf >= 1) {
         rdmFm1 = R.random_int(0, 6);
         let rdcol = R.random_int(0, 7);
         if (rdcol >= 4) {
             let auxpal = R.random_choice(paleta)
-            gCol1 = auxpal[R.random_int(0, 10)]
+            gCol1 = auxpal[R.random_int(0, 11)]
             //auxpal = R.random_choice(paleta)
-            gCol2 = auxpal[R.random_int(0, 10)]
+            gCol2 = auxpal[R.random_int(0, 11)]
         }
         addForms();
     } else {
@@ -67,8 +70,8 @@ function addForms2() {
         paleta.splice(index, 1);
         cols2 = R.random_choice(paleta);
     } else {
-        for (let t = 0; t < 7; t++) {
-            cols1.push(paleta[t][R.random_int(0, 10)]);
+        for (let t = 0; t < 8; t++) {
+            cols1.push(paleta[t][R.random_int(0, 11)]);
         }
         cols2 = cols1.slice(5, 7);
     }
@@ -113,11 +116,11 @@ function addForms2() {
 
             if (random(100) < 50) {
                 if (rdmFm2 == 1) {
-                    forms.push(new Circulo2(x + cellW / 2, y + cellH / 2, d, cols2[0]));
-                    forms.push(new Circulo2(x + cellW / 2, y + cellH / 2, d / 2, cols2[1]));
+                    forms.push(new Circulo(x + cellW / 2, y + cellH / 2, d, cols2[0], 0, 1));
+                    forms.push(new Circulo(x + cellW / 2, y + cellH / 2, d / 2, cols2[1], 0, 1));
                 } else {
-                    forms.push(new RectStatic(x + cellW / 2, y + cellH / 2 , d/2, d/2, cols2[0], d/2));
-                    forms.push(new RectStatic(x + cellW / 2, y + cellH / 2, d/3, d/3, cols2[1], d/3));
+                    forms.push(new RectStatic(x + cellW / 2, y + cellH / 2, d / 2, d / 2, cols2[0], d / 2, 1));
+                    forms.push(new RectStatic(x + cellW / 2, y + cellH / 2, d / 3, d / 3, cols2[1], d / 3, 1));
                 }
             }
         }
@@ -224,29 +227,6 @@ class LineMove2 {
     }
 }
 
-class Circulo2 {
-    constructor(x, y, w, col) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.col = col;
-    }
-
-    show() {
-        push();
-        translate(this.x, this.y);
-        noStroke();
-        if (dstrd == 2 || dstrd == 5 || dstrd == 7) { fill(this.col + '80'); }
-        else { fill(this.col); }
-        circle(0, 0, this.w);
-        pop();
-    }
-
-    move() { }
-
-    init() { }
-}
-
 function addForms() {
 	forms.length = 0;
     let seg = 6;
@@ -269,40 +249,23 @@ function shape(x, y, w) {
     let nn = 3;
     let lines = [];
     let ww = w / nn;
-    let col1;
-    let col2;
-    let col3;
-    let col4;
+    let Arrcol = [];
     if (gCol1 == '' && gCol2 == '') {
-        if (tkid % 2 == 0) {
-            col1 = R.random_choice(paleta[3]);
-            col2 = R.random_choice(paleta[1]);
-            col3 = R.random_choice(paleta[2]);
-            col4 = R.random_choice(paleta[6]);
-        } else if (tkid % 5 == 0) {
-            arrcol = R.random_choice(paleta);
-            if (R.random_int(0, 1) == 0) {
-                col1 = arrcol[0];
-                col2 = arrcol[1];
-                col3 = arrcol[2];
-                col4 = arrcol[3];
-            } else {
-                col1 = arrcol[7];
-                col2 = arrcol[8];
-                col3 = arrcol[9];
-                col4 = arrcol[10];
+        if (tkid % 5 == 0) {
+            let pltsel = R.random_choice(paleta);
+            for (let i = 0; i < 4; i++) {
+                Arrcol.push(R.random_choice(pltsel));
             }
         } else {
-            col1 = R.random_choice(paleta[0]);
-            col2 = R.random_choice(paleta[4]);
-            col3 = R.random_choice(paleta[6]);
-            col4 = R.random_choice(paleta[5]);
+            for (let i = 0; i < 4; i++) {
+                Arrcol.push(R.random_choice(pltcols));
+            }
         }
     } else {
-        col1 = gCol1;
-        col2 = gCol2;
-        col3 = R.random_choice(paleta[0]);
-        col4 = R.random_choice(paleta[1]);
+        Arrcol.push(gCol1);
+        Arrcol.push(gCol2);
+        Arrcol.push(R.random_choice(pltcols));
+        Arrcol.push(R.random_choice(pltcols));
     }
     for (let i = 0; i < nn; i++) {
         for (let j = 0; j < nn; j++) {
@@ -349,16 +312,18 @@ function shape(x, y, w) {
     for (let l of lines) {
         switch (fg) {
             case 0:
-                forms.push(new LineMove(l.x1, l.y1, l.w1, col1, stw, R.random_num(0, 10)));
+                forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, R.random_num(0, 10)));
                 stw = w * 0.02;
                 break;
             case 1:
                 stw = w * 0.18;
-                forms.push(new LineMove(l.x1, l.y1, l.w1, col1, stw, R.random_num(0, 10)));
+                forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, R.random_num(0, 10)));
                 break;
             case 2:
             case 3:
-                forms.push(new Elipse(l.x2, l.y2, l.w1 * 0.15, l.w1 * 0.15, col1, stw));
+                forms.push(new Elipse(l.x1, l.y1, l.w1 * 0.15, l.w1 * 0.15, Arrcol[0], stw));
+                forms.push(new LineMove(l.x2, l.y2, l.w1, Arrcol[0], stw, R.random_num(0, 10)));
+                console.log(stw);
                 stw = w * 0.02;
                 break;
         }
@@ -369,56 +334,57 @@ function shape(x, y, w) {
         switch (fg) {
             case 0:
                 if (tkid % 2 == 0) {
-                    if (R.random_int(0, 1) == 1) forms.push(new LineMove(l.x1, l.y1, l.w1, col1, stw, R.random_num(0, 10)));
+                    if (R.random_int(0, 1) == 1) forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, R.random_num(0, 10)));
                 } else {
-                    forms.push(new LineMove(l.x1, l.y1, l.w1, col2, stw, R.random_num(0, 10)));
+                    forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[1], stw, R.random_num(0, 10)));
                 }
                 break;
             case 1:
                 if (tkid % 2 == 0) {
-                    if (R.random_int(0, 1) == 1) forms.push(new Circulo(l.x1, l.y1, 5, col2, 5));
+                    if (R.random_int(0, 1) == 1) forms.push(new Circulo(l.x1, l.y1, 5, Arrcol[1], 5));
                 } else {
-                    forms.push(new Circulo(l.x1, l.y1, 5, col2, 5));
+                    forms.push(new Circulo(l.x1, l.y1, 5, Arrcol[1], 5));
                 }
                 
                 break;
             case 2:
                 stw = w * 0.18;
                 if (tkid % 2 == 0) {
-                    if (R.random_int(0, 1) == 1) forms.push(new LineMove(l.x1, l.y1, l.w1, col2, stw, R.random_num(0, 10)));
+                    if (R.random_int(0, 1) == 1) forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[1], stw, R.random_num(0, 10)));
                 } else {
-                    forms.push(new LineMove(l.x1, l.y1, l.w1, col2, stw, R.random_num(0, 10)));
+                    forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[1], stw, R.random_num(0, 10)));
                 }
                 break;
             case 3:
                 if (tkid % 2 == 0) {
                     if (R.random_int(0, 1) == 1) {
                         stw = w * 0.20;
-                        forms.push(new DrawLines(l.x1, l.y1, l.w1, col2));
-                        forms.push(new RectStatic(l.x2, l.y2, 1, 1, col4, stw));
+                        forms.push(new DrawLines(l.x1, l.y1, l.w1, Arrcol[1]));
                     } else {
-                        forms.push(new RectMove(l.x1, l.y1, 1, 1, col2, stw));
+                        if (rdtc1 == 0) { forms.push(new RectMove(l.x1, l.y1, 1, 1, Arrcol[1], stw)); }
+                        else { forms.push(new RectStatic(l.x1, l.y1, 1, 1, Arrcol[2], stw)); }
+                        forms.push(new RectMove(l.x1, l.y1, 1, 1, Arrcol[3], stw));
                     }
                 }else {
                     if (R.random_int(0, 1) == 1) {
-                        forms.push(new RectStatic(l.x2, l.y2, 1, 1, col2, stw));
                     } else {
-                        forms.push(new RectMove(l.x1, l.y1, 1, 1, col2, stw));
+                        if (rdtc1 == 0) { forms.push(new RectMove(l.x1, l.y1, 1, 1, Arrcol[1], stw)); }
+                        else { forms.push(new RectStatic(l.x1, l.y1, 1, 1, Arrcol[2], stw)); }
+                        forms.push(new RectMove(l.x1, l.y1, 1, 1, Arrcol[3], stw));
                     }
-                    
                 }
                 break;
         }
     }
 
     stw = R.random_int(5, 11);
-    stroke(col3)
+
     for (let l of lines) {
         if (tkid % 2 == 0) {
-            forms.push(new PointStatic(l.x1, l.y1, col3, stw));
+            forms.push(new PointStatic(l.x1, l.y1, Arrcol[2], stw));
         } else {
-            forms.push(new PointStatic(l.x1, l.y1, col3, stw));
-            if (R.random_int(0, 1) == 1) forms.push(new PointStatic(l.x1, l.y1, col4, stw));
+            forms.push(new PointStatic(l.x1, l.y1, Arrcol[2], stw));
+            if (R.random_int(0, 1) == 1) forms.push(new PointStatic(l.x1, l.y1, Arrcol[3], stw));
         }
     }
 }
@@ -447,7 +413,7 @@ class LineMove {
 		rotate(this.a);        
         strokeWeight(this.stw);
         if (dstrd == 4 || dstrd == 7 || dstrd == 9) { stroke(this.col); strokeWeight(dstrd); }
-        else if (dstrd == 2 || dstrd == 5) { stroke(this.col + '70'); }
+        else if (dstrd == 2 || dstrd == 5) { stroke(this.col + '85'); }
         else { stroke(this.col); }
 
         if (rdmFm1 <= 1) {
@@ -458,7 +424,7 @@ class LineMove {
             } else if (this.nl < 9) {
                 line(0, 0, this.l, 0)
             } else {
-                if (int(this.w) > 20) { triangle(0, -this.w * 0.4, this.w * 0.25, 0, -this.w * 0.25, 0); }
+                if (int(this.w) > 20 && rdtc1 == 1) { triangle(0, -this.w * 0.4, this.w * 0.25, 0, -this.w * 0.25, 0); }
                 else {line(0, -this.w, 0, 0, )}
             }
         } else if (rdmFm1 == 2) {
@@ -471,7 +437,7 @@ class LineMove {
                 noFill();
                 arc(0, 0, -this.w * 2, this.w * 2, 0, PI/2);
             } else {
-                if (int(this.w) > 20) { triangle(0, -this.w * 0.4, this.w * 0.25, 0, -this.w * 0.25, 0); }
+                if (int(this.w) > 20 && rdtc1 == 1) { triangle(0, -this.w * 0.4, this.w * 0.25, 0, -this.w * 0.25, 0); }
                 else {
                     line(0, 0, -this.w, 0)
                 }
@@ -484,7 +450,7 @@ class LineMove {
             } else if (this.nl < 9) {
                 line(0, -this.w, this.w, 0);
             } else {
-                if (int(this.w) > 20) { triangle(0, -this.w * 0.4, this.w * 0.25, 0, -this.w * 0.25, 0); }
+                if (int(this.w) > 20 && rdtc1 == 1) { triangle(0, -this.w * 0.4, this.w * 0.25, 0, -this.w * 0.25, 0); }
                 else {
                     line(0, 0, -this.w, 0)
                 }
@@ -559,7 +525,7 @@ class Elipse {
     show() {
         push();
         translate(this.x, this.y);
-        if (dstrd == 1 || dstrd == 3) { stroke(this.col + '80'); }
+        if (dstrd == 1 || dstrd == 3) { stroke(this.col + '85'); }
         else { stroke(this.col); }
         strokeWeight(this.stw);
         ellipse(0, 0, this.w, this.h);
@@ -595,19 +561,26 @@ class PointStatic {
 
 
 class Circulo {
-    constructor(x, y, w, col, stw) {
+    constructor(x, y, w, col, stw, frm) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.col = col;
         this.stw = stw;
+        this.frm = frm;
     }
 
     show() {
         push();
         translate(this.x, this.y);
-        stroke(this.col);
-        strokeWeight(this.stw);
+        if (this.frm == 1) {
+            noStroke();
+            if (dstrd == 2 || dstrd == 5 || dstrd == 7) { fill(this.col + '80'); }
+            else { fill(this.col); }
+        } else {
+            stroke(this.col);
+            strokeWeight(this.stw);
+        }
         ellipse(0, 0, this.w);
         pop();
     }
@@ -634,11 +607,16 @@ class RectMove {
         push();
         translate(this.x, this.y);
         rotate(this.a);
-        if (dstrd == 0 || dstrd == 6 || dstrd == 4) { stroke(this.col + '80'); fill(this.col + '80'); }
+        if (dstrd == 0 || dstrd == 6 || dstrd == 4) { stroke(this.col + '85'); fill(this.col + '85'); }
         else { stroke(this.col); fill(this.col); }
-        strokeWeight(this.stw);
         let sw = this.w;
-        rect(0, 0, sw, sw, 0);
+        if (rdtc1 == 1) {
+            strokeWeight(this.stw);
+            rect(0, 0, sw, sw, 0);
+        } else {
+            strokeWeight(this.stw * 0.8);
+            triangle(0, -sw * 0.15, sw * 0.10, 0, -sw * 0.10, 0);
+        }
         pop();
     }
 
@@ -664,24 +642,36 @@ class RectMove {
 }
 
 class RectStatic {
-    constructor(x, y, w, h, col, stw) {
+    constructor(x, y, w, h, col, stw, frm) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
         this.col = col;
         this.stw = stw;
+        this.frm = frm;
     }
 
     show() {
         push();
         translate(this.x, this.y);
-        rotate(PI / 4.0);
-        if (dstrd == 0 || dstrd == 6 || dstrd == 9) { stroke(this.col + '80'); fill(this.col + '80'); }
+        if (dstrd == 0 || dstrd == 6 || dstrd == 9) { stroke(this.col + '85'); fill(this.col + '85'); }
         else { stroke(this.col); fill(this.col); }
         strokeWeight(this.stw);
         let sw = this.w;
-        rect(0, 0, sw, sw, 0);
+        if (this.frm != 1) {
+            if (rdtc1 == 1) {
+                rotate(PI / 4.0);
+                rect(0, 0, sw, sw, 0);
+            } else {
+                strokeWeight(this.stw * 0.9);
+                triangle(0, sw * 0.15, -sw * 0.10, 0, sw * 0.10, 0);
+            }
+        } else {
+            rotate(PI / 4.0);
+            rect(0, 0, sw, sw, 0);
+        }
+
         pop();
     }
 
