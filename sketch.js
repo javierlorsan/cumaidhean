@@ -412,8 +412,8 @@ class LineMove {
         translate(this.x, this.y, this.w);
 		rotate(this.a);        
         strokeWeight(this.stw);
-        if (dstrd == 4 || dstrd == 7 || dstrd == 9) { stroke(this.col); strokeWeight(dstrd); }
-        else if (dstrd == 2 || dstrd == 5) { stroke(this.col + '85'); }
+        if (dstrd == 5 || dstrd == 7 || dstrd == 9) { stroke(this.col); strokeWeight(dstrd); }
+        else if (dstrd == 2 || dstrd == 6) { stroke(this.col + '85'); }
         else { stroke(this.col); }
 
         if (rdmFm1 <= 1) {
