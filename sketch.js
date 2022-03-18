@@ -1,7 +1,7 @@
 let colors2 = ["#C61D34", "#EFD7B3", "#580D14", "#F42444", "#4C1F22", "#1F1715", "#86663F", "#BD9F7A", "#5C5958", "#A0121B", "#C70A27", "#DCE6F2"]; //cheesecake
 let colors1 = ["#004E65", "#136E80", "#5E8886", "#EA9F42", "#FFDEBB", "#6F5B50", "#F6AA07", "#426974", "#1EA7C2", "#9BC5C3", "#F88C06", "#83A603"]; //sunrise
 let colors = ["#FD0D00", "#D90602", "#4D0101", "#6E8104", "#173008", "#FFC000", "#C2C8D4", "#9FA3AD", "#F8D56B", "#2F4D1D", "#A0BC04", "#BF6550"]; //poopy
-let colors3 = ["#36025F", "#8C32CA", "#DA2DAE", "#FF95FF", "#FF1F3C", "#919BDE", "#A0D100", "#6A06B9", "#B049F7", "#F807BB", "#711171", "#730217"]; //pcordobes
+let colors3 = ["#36025F", "#8C32CA", "#DA2DAE", "#DD82DD", "#FF1F3C", "#919BDE", "#A0D100", "#6A06B9", "#B049F7", "#F807BB", "#711171", "#730217"]; //pcordobes
 let colors7 = ["#F23D91", "#F079F2", "#5F72D9", "#83A603", "#F22727", "#F241A3", "#F063F2", "#97BF04", "#F22222", "#F2F2F2", "#F1B3F2", "#4659C9"] //pcordobes2
 let colors4 = ["#BFCAD5", "#dee2e6", "#ced4da", "#adb5bd", "#6c757d", "#d4d700", "#9ef01a", "#C7EC8C", "#F6F905", "#9FA2A5", "#CBCFD3", "#280459"]; //blue/gray
 let colors5 = ["#f94144", "#f3722c", "#f8961e", "#f9c74f", "#90be6d", "#43aa8b", "#577590", "#D43739", "#FD5A01", "#D37604", "#3F6B1D", "#3C5911" ]; // Multicol
