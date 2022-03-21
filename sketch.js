@@ -6,7 +6,7 @@ let colors7 = ["#F23D91", "#F079F2", "#5F72D9", "#83A603", "#F22727", "#F241A3",
 let colors4 = ["#BFCAD5", "#dee2e6", "#ced4da", "#adb5bd", "#6c757d", "#d4d700", "#9ef01a", "#C7EC8C", "#F6F905", "#9FA2A5", "#CBCFD3", "#280459"]; //blue/gray
 let colors5 = ["#f94144", "#f3722c", "#f8961e", "#f9c74f", "#90be6d", "#43aa8b", "#577590", "#D43739", "#FD5A01", "#D37604", "#3F6B1D", "#3C5911" ]; // Multicol
 let colors6 = ["#d8f3dc", "#b7e4c7", "#95d5b2", "#74c69d", "#52b788", "#40916c", "#2d6a4f", "#0C6A40", "#5A9077", "#5FD49D", "#95C6AE", "#83A603"]; // green
-let fondo = ["#D0A519", "#C2C5AA", "#D1F5F6", "#CDB4DB", "#D8F3DC", "#FD8A03", "#883E03", "#936639", "#4361ee", "#3a0ca3", "#F8C9DA", "#9d4edd", "#F992A5", "#dab6fc", "#DFAB8F", "#fdffb6","#e5dcc5","#ffffff"];
+let fondo = ["#D0A519", "#C2C5AA", "#8BBCBD", "#CDB4DB", "#D8F3DC", "#FD8A03", "#883E03", "#936639", "#4361ee", "#3a0ca3", "#F8C9DA", "#9d4edd", "#F992A5", "#dab6fc", "#DFAB8F", "#fdffb6","#e5dcc5","#ffffff"];
 let paleta = [colors, colors1, colors2, colors3, colors4, colors5, colors6, colors7];
 let pltcols = colors.concat(colors1, colors2, colors3, colors4, colors5, colors6, colors7)
 let WIDTH = window.innerWidth;
@@ -42,12 +42,16 @@ function init() {
     rdtc1 = R.random_int(0, 1);
     let rdf = R.random_int(0, 3);
     if (rdf >= 1) {
+        if (dstrd >= 3 && dstrd < 6) {
+            bgCol = R.random_choice(pltcols);
+            paleta = [fondo];
+            pltcols = fondo;
+        }
         rdmFm1 = R.random_int(0, 6);
         let rdcol = R.random_int(0, 7);
         if (rdcol >= 4) {
             let auxpal = R.random_choice(paleta)
             gCol1 = auxpal[R.random_int(0, 11)]
-            //auxpal = R.random_choice(paleta)
             gCol2 = auxpal[R.random_int(0, 11)]
         }
         addForms();
@@ -146,8 +150,10 @@ class LineMove2 {
         push();
         translate(this.x, this.y);
         rotate(this.a);
+        if (dstrd == 2 || dstrd == 6) { stroke(this.col + '85'); }
+        else { stroke(this.col); }
         fill(this.col);
-        stroke(this.col);
+        //stroke(this.col);
         strokeWeight(this.stw);
         if (rdmFm2b <= 3) {
             if (this.nl < 6) {
@@ -323,7 +329,6 @@ function shape(x, y, w) {
             case 3:
                 forms.push(new Elipse(l.x1, l.y1, l.w1 * 0.15, l.w1 * 0.15, Arrcol[0], stw));
                 forms.push(new LineMove(l.x2, l.y2, l.w1, Arrcol[0], stw, R.random_num(0, 10)));
-                console.log(stw);
                 stw = w * 0.02;
                 break;
         }
