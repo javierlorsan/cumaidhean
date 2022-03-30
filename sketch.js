@@ -253,6 +253,7 @@ function shape(x, y, w) {
     let nn = 3;
     let lines = [];
     let ww = w / nn;
+    Arrcol.length = 0;
     if (gCol1 == '' && gCol2 == '') {
         if (tkid % 5 == 0) {
             let pltsel = R.random_choice(paleta);
@@ -431,7 +432,6 @@ class LineMove {
                 line(0, 0, this.l, 0)
             } else {
                 if (int(this.w) > 20 && rdtc1 == 1) {
-                    console.log(this.l * 0.1);
                     strokeWeight(this.w * 0.1);
                     noFill();
                     rect(0, 0, this.l, this.w * 0.5, 7);
