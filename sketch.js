@@ -22,6 +22,7 @@ function setup() {
     R = new Random(seed)
     translate(WIDTH / 2, HEIGHT / 2);
     translate(-WIDTH / 2, -HEIGHT / 2);
+    pixelDensity(1);
     centerCanvas();
 	init();
 }
