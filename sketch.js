@@ -15,10 +15,13 @@ let DIM = Math.min(WIDTH, HEIGHT);
 let tokenData = genTokenData(633);
 let tkid = tokenData.tokenId;
 let seed = parseInt(tokenData.hash.slice(0, 16), 16)
-let rdtc1, R, fg, forms = [], bgCol, wid, gCol1 = '', gCol2 = '', vspeed = 45, Arrcol = [], cols1 = [], cols2 = [], rdrectri; 
+let rdtc1, R, fg, forms = [], bgCol, wid, gCol1 = '', gCol2 = '', vspeed = 45, Arrcol = [], cols1 = [], cols2 = [], rdrectri;
+let prc = ((DIM - 650) / 650) * 100;
 
 function setup() {
     createCanvas(DIM, DIM);
+    prc = floor(prc);
+    console.log(prc);
     R = new Random(seed)
     translate(WIDTH / 2, HEIGHT / 2);
     translate(-WIDTH / 2, -HEIGHT / 2);
@@ -405,7 +408,7 @@ class LineMove {
 	constructor(x, y, w, col, stw, rdnl) {
 		this.x = x;
 		this.y = y;
-		this.w = w;
+		this.w = w + ((prc * w)/100);
 		this.a = int(random(4)) * PI * 0.5;
 		this.l = this.w;
 		this.init();
