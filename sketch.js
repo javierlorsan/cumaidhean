@@ -13,16 +13,21 @@ let WIDTH = window.innerWidth;
 let HEIGHT = window.innerHeight;
 let DIM = Math.min(WIDTH, HEIGHT);
 let tokenData = genTokenData(633);
+//tokenData.tokenId = 2003456;
+//tokenData.hash = '0x9ca74294e3c52ab7bd0eb33911413dc7a26ea95616af22a7b4409e5424fccbb7';
 let tkid = tokenData.tokenId;
 let seed = parseInt(tokenData.hash.slice(0, 16), 16)
+console.log(tokenData.hash);
 let rdtc1, R, fg, forms = [], bgCol, wid, gCol1 = '', gCol2 = '', vspeed = 45, Arrcol = [], cols1 = [], cols2 = [], rdrectri;
 let prc = ((DIM - 650) / 650) * 100;
+let rdln;
 
 function setup() {
     createCanvas(DIM, DIM);
     prc = floor(prc);
-    console.log(prc);
+    //console.log(prc);
     R = new Random(seed)
+    R1 = new Random(seed)
     translate(WIDTH / 2, HEIGHT / 2);
     translate(-WIDTH / 2, -HEIGHT / 2);
     pixelDensity(1);
@@ -87,7 +92,7 @@ function addForms2() {
 
     for (let j = 0; j < rows; j++) {
         for (let i = 0; i < cols; i++) {
-
+            rdln = R.random_int(0, 10);
             let x = i * cellW;
             let y = j * cellH;
             let d = cellW / 2;
@@ -98,17 +103,17 @@ function addForms2() {
                     dst = d * 2;
                     switch (r) {
                         case 0:
-                            forms.push(new LineMove2(x + cellW + cellW / 2, y + cellH / 2, dst, R.random_choice(cols1), d / 2, R.random_int(0, 10)));
+                            forms.push(new LineMove2(x + cellW + cellW / 2, y + cellH / 2, dst, R.random_choice(cols1), d / 2, rdln));
                             break;
                         case 1:
-                            forms.push(new LineMove2(x + cellW / 2, y + cellH / 2, dst, R.random_choice(cols1), d / 2, R.random_int(0, 10)));
+                            forms.push(new LineMove2(x + cellW / 2, y + cellH / 2, dst, R.random_choice(cols1), d / 2, rdln));
                             break;
                         case 2:
-                            if (rdmFm2 == 1) { forms.push(new LineMove2(x + cellW + cellW / 2, y + cellH / 2, dst, R.random_choice(cols1), d, R.random_int(0, 10))); }
-                            else { forms.push(new LineMove2(x + cellW + cellW / 2, y + cellH / 2, dst, R.random_choice(cols1), d / 2, R.random_int(0, 10))); }
+                            if (rdmFm2 == 1) { forms.push(new LineMove2(x + cellW + cellW / 2, y + cellH / 2, dst, R.random_choice(cols1), d, rdln)); }
+                            else { forms.push(new LineMove2(x + cellW + cellW / 2, y + cellH / 2, dst, R.random_choice(cols1), d / 2, rdln)); }
                             break;
                         case 3:
-                            forms.push(new LineMove2(x + cellW + cellW / 2, y + cellH / 2, dst, R.random_choice(cols1), d, R.random_int(0, 10)));
+                            forms.push(new LineMove2(x + cellW + cellW / 2, y + cellH / 2, dst, R.random_choice(cols1), d, rdln));
                             break;
                     }
                 }
@@ -141,7 +146,7 @@ class LineMove2 {
         this.x = x;
         this.y = y;
         this.w = w;
-        this.a = int(random(4)) * PI * 0.5;
+        this.a = R.random_int(0,4) * PI * 0.5;
         this.l = this.w;
         this.init();
         this.col = col;
@@ -157,7 +162,6 @@ class LineMove2 {
         if (dstrd == 2 || dstrd == 6) { stroke(this.col + '85'); }
         else { stroke(this.col); }
         fill(this.col);
-        //stroke(this.col);
         strokeWeight(this.stw);
         if (rdmFm2b <= 3) {
             if (this.nl < 6) {
@@ -239,11 +243,12 @@ class LineMove2 {
 
 function addForms() {
 	forms.length = 0;
-    let seg = R.random_int(5,6);
+    let seg = R.random_int(6,7);
     let wx = 0.8;
     if (seg <= 4) { wx = 0.7; } else if (seg > 5) { vspeed = 30; }
     if (WIDTH > HEIGHT) { w = HEIGHT / seg; } else { w = WIDTH / seg;}
     w = DIM / seg;
+    rdln = R.random_int(0, 10);
 	for (let i = 0; i < seg; i++) {
 		for (let j = 0; j < seg; j++) {
             let x = i * w + w / 2;
@@ -320,16 +325,16 @@ function shape(x, y, w) {
     for (let l of lines) {
         switch (fg) {
             case 0:
-                forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, R.random_num(0, 10)));
+                forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, rdln));
                 stw = w * 0.02;
                 break;
             case 1:
                 stw = w * 0.18;
-                forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, R.random_num(0, 10)));
+                forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, rdln));
                 break;
             case 2:
             case 3:
-                forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, R.random_num(0, 10)));
+                forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, rdln));
                 forms.push(new Elipse(l.x2, l.y2, l.w1 * 0.15, l.w1 * 0.15, Arrcol[0], stw));
                 stw = w * 0.02;
                 break;
@@ -341,9 +346,9 @@ function shape(x, y, w) {
         switch (fg) {
             case 0:
                 if (tkid % 2 == 0) {
-                    if (R.random_int(0, 1) == 1) forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, R.random_num(0, 10)));
+                    if (R.random_int(0, 1) == 1) forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, rdln));
                 } else {
-                    forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[1], stw, R.random_num(0, 10)));
+                    forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[1], stw, rdln));
                 }
                 break;
             case 1:
@@ -357,9 +362,9 @@ function shape(x, y, w) {
             case 2:
                 stw = w * 0.18;
                 if (tkid % 2 == 0) {
-                    if (R.random_int(0, 1) == 1) forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[1], stw, R.random_num(0, 10)));
+                    if (R.random_int(0, 1) == 1) forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[1], stw, rdln));
                 } else {
-                    forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, R.random_num(0, 10)));
+                    forms.push(new LineMove(l.x1, l.y1, l.w1, Arrcol[0], stw, R.random_int(0, 10)));
                 }
                 break;
             case 3:
@@ -381,8 +386,7 @@ function shape(x, y, w) {
                         }
                     }
                 } else {
-                    forms.push(new LineMove(l.x2, l.y2, l.w1, Arrcol[1], stw, R.random_num(0, 10)));
-                    //forms.push(new LineMove(l.x2, l.y2, l.w1, Arrcol[2], stw, R.random_num(0, 10)));
+                    forms.push(new LineMove(l.x2, l.y2, l.w1, Arrcol[1], stw, rdln));
                 }
                 break;
         }
@@ -409,12 +413,13 @@ class LineMove {
 		this.x = x;
 		this.y = y;
 		this.w = w + ((prc * w)/100);
-		this.a = int(random(4)) * PI * 0.5;
+        this.a = R.random_int(0,4) * PI * 0.5;
 		this.l = this.w;
 		this.init();
         this.col = col;
         this.stw = stw;
         this.nl = rdnl;
+        console.log(rdnl);
 	}
 
     show() {
@@ -452,9 +457,9 @@ class LineMove {
                 noFill();
                 arc(0, 0, -this.w * 2, this.w * 2, 0, PI/2);
             } else {
-                if (int(this.w) > 20 && rdtc1 == 1) { triangle(0, -this.l * 0.4, this.l * 0.25, 0, -this.l * 0.25, 0); }
+                if (int(this.w) > 30 && rdtc1 == 1) { triangle(0, -this.l * 0.4, this.l * 0.25, 0, -this.l * 0.25, 0); }
                 else {
-                    line(0, 0, -this.w, 0)
+                    line(0, 0, -this.l, 0)
                 }
             }
         } else {
@@ -465,9 +470,9 @@ class LineMove {
             } else if (this.nl < 9) {
                 line(0, -this.w, this.w, 0);
             } else {
-                if (int(this.w) > 20 && rdtc1 == 1) { triangle(0, -this.l * 0.4, this.l * 0.25, 0, -this.l * 0.25, 0); }
+                if (int(this.w) > 30 && rdtc1 == 1) { triangle(0, -this.l * 0.4, this.l * 0.25, 0, -this.l * 0.25, 0); }
                 else {
-                    line(0, 0, -this.w, 0)
+                    line(0, 0, -this.l, 0)
                 }
             }
 
@@ -533,8 +538,8 @@ class Elipse {
         this.y = y;
         this.w = w;
         this.h = h;
-        this.a = int(random(4)) * PI * 0.5;
-        this.l = int(random(2)) * this.w * 1.8;
+        this.a = R.random_int(0,4) * PI * 0.5;
+        this.l = R.random_int(0,2) * this.w * 1.8;
         this.init();
         this.col = col;
         this.stw = stw;
@@ -552,7 +557,7 @@ class Elipse {
             rotate(this.a);
             noStroke()
             ellipse(0, 0, this.stw);
-            let c = 8; //int(random(5, 10));
+            let c = 8;
             for (let i = 0; i < c; i++) {
                 for (let j = 0; j < c; j++) {
                     let a = TAU / c;
@@ -582,9 +587,9 @@ class Elipse {
         this.rnd = int(random(20));
         this.step = 1 / vspeed;
         this.a0 = this.a;
-        this.a1 = int(random(4)) * PI * 0.5;
+        this.a1 = R.random_int(0, 4) * PI * 0.5;
         this.l0 = this.l;
-        this.l1 = int(random(2)) * this.w * 1.8;
+        this.l1 = R.random_int(0, 2) * this.w * 1.8;
     }
 }
 
@@ -617,8 +622,8 @@ class Circulo {
         this.y = y;
         this.w = w;
         this.col = col;
-        this.a = int(random(4)) * PI * 0.5;
-        this.l = int(random(2)) * this.w * 1.8;
+        this.a = R.random_int(0, 4) * PI * 0.5;
+        this.l = R.random_int(0, 2) * this.w * 1.8;
         this.init();
         this.stw = stw;
         this.frm = frm;
@@ -670,9 +675,9 @@ class Circulo {
         this.rnd = int(random(20));
         this.step = 1 / vspeed;
         this.a0 = this.a;
-        this.a1 = int(random(4)) * PI * 0.5;
+        this.a1 = R.random_int(0, 4) * PI * 0.5;
         this.l0 = this.l;
-        this.l1 = int(random(2)) * this.w * 1.8;
+        this.l1 = R.random_int(0, 2) * this.w * 1.8;
     }
 }
 
@@ -682,8 +687,8 @@ class RectMove {
         this.y = y;
         this.w = w;
         this.h = h;
-        this.a = int(random(4)) * PI * 0.5;
-        this.l = int(random(2)) * this.w * 1.8;
+        this.a = R.random_int(0, 4) * PI * 0.5;
+        this.l = R.random_int(0, 2) * this.w * 1.8;
         this.init();
         this.col = col;
         this.stw = stw;
@@ -721,9 +726,9 @@ class RectMove {
         this.rnd = int(random(20));
         this.step = 1 / vspeed;
         this.a0 = this.a;
-        this.a1 = int(random(4)) * PI * 0.5;
+        this.a1 = R.random_int(0, 4) * PI * 0.5;
         this.l0 = this.l;
-        this.l1 = int(random(2)) * this.w * 1.8;
+        this.l1 = R.random_int(0, 2) * this.w * 1.8;
     }
 }
 
