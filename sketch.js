@@ -74,7 +74,7 @@ function init() {
 
 function addForms2() {
 
-    let cols = R.random_int(10, 15), rows = cols, cellW = DIM / cols, cellH = DIM / rows, dst;
+    let cols = R.random_int(12, 17), rows = cols, cellW = DIM / cols, cellH = DIM / rows, dst;
 
     if (tkid % 2 == 0) paleta.reverse();
 
@@ -419,6 +419,7 @@ class LineMove {
         this.col = col;
         this.stw = stw;
         this.nl = rdnl;
+        this.rdarc = R.random_int(0, 1);
         console.log(rdnl);
 	}
 
@@ -442,8 +443,12 @@ class LineMove {
             } else {
                 if (int(this.w) > 20 && rdtc1 == 1) {
                     strokeWeight(this.w * 0.1);
-                    noFill();
-                    rect(0, 0, this.l, this.w * 0.5, 7);
+                    if (this.rdarc == 1) {
+                        noFill();
+                        rect(0, 0, this.l, this.w * 0.5, 7);
+                    } else {
+                        line(0, 0, this.l, 0)
+                    }
                 }
                 else {line(0, -this.w, 0, 0, )}
             }
@@ -454,8 +459,12 @@ class LineMove {
                 line(0, 0, this.l, 0)
                 line(0, -this.l, 0, 0);
             } else if (this.nl < 9) {
-                noFill();
-                arc(0, 0, -this.w * 2, this.w * 2, 0, PI/2);
+                if (this.rdarc == 1) {
+                    noFill();
+                    arc(0, 0, -this.w * 2, this.w * 2, 0, PI / 2);
+                } else {
+                    line(0, 0, this.l, 0)
+                }
             } else {
                 if (int(this.w) > 30 && rdtc1 == 1) { triangle(0, -this.l * 0.4, this.l * 0.25, 0, -this.l * 0.25, 0); }
                 else {
