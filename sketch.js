@@ -50,7 +50,7 @@ function init() {
     dstrd = R.random_int(0, 10);
     rdtc1 = R.random_int(0, 1);
     let rdf = R.random_int(0, 3);
-    if (rdf >= 2) {
+    if (rdf >= 1) {
         if (dstrd >= 3 && dstrd < 6) {
             bgCol = R.random_choice(pltcols);
             paleta = [fondo];
@@ -168,13 +168,13 @@ class LineMove2 {
                 line(0, 0, this.l, 0)
             } else if (this.nl < 7) {
                 line(0, 0, this.l, 0)
-                line(0, -this.l, 0, 0);
+                //line(0, -this.l, 0, 0);
             } else if (this.nl < 8) {
                 line(0, 0, this.w, 0)
                 line(this.w, -this.w, this.w, 0);
             } else if (this.nl < 9) {
                 noFill();
-                if (rdmFm2 == 1) { arc(0, 0, -this.w * 2, this.w * 2, 0, PI / 2); }
+                if (rdmFm2 == 3) { arc(0, 0, -this.w * 2, this.w * 2, 0, PI / 2); }
             } else {
                 if (int(this.w) > 20) { if (rdmFm2 == 1) triangle(0, -this.w * 0.4, this.w * 0.25, 0, -this.w * 0.25, 0); }
                 else { line(0, 0, -this.w, 0) }
@@ -190,7 +190,7 @@ class LineMove2 {
                 line(0, -this.w, this.w, 0);
             } else if (this.nl < 9) {
                 noFill();
-                if (rdmFm2 == 1) { arc(0, 0, -this.w * 2, this.w * 2, 0, PI / 2); }
+                if (rdmFm2 == 3) { arc(0, 0, -this.w * 2, this.w * 2, 0, PI / 2); }
             } else {
                 if (int(this.w) > 20) { if (rdmFm2 == 1) triangle(0, -this.w * 0.4, this.w * 0.25, 0, -this.w * 0.25, 0); }
                 else { line(0, 0, -this.w, 0) }
@@ -206,7 +206,7 @@ class LineMove2 {
                 line(this.w, -this.w, this.w, 0);
             } else if (this.nl < 9) {
                 noFill();
-                if (rdmFm2 == 1) { arc(0, 0, -this.w * 2, this.w * 2, 0, PI / 2); }
+                if (rdmFm2 == 3) { arc(0, 0, -this.w * 2, this.w * 2, 0, PI / 2); }
             } else {
                 if (int(this.w) > 20) { if (rdmFm2 == 1) triangle(0, -this.w * 0.4, this.w * 0.25, 0, -this.w * 0.25, 0); }
                 else { line(0, 0, -this.w, 0) }
@@ -427,7 +427,8 @@ class LineMove {
         
         push();
         translate(this.x, this.y, this.w);
-		rotate(this.a);        
+        rotate(this.a);
+        //if (this.t > 0) {if (this.rnd2 == 0) translate(this.l, 0);}
         strokeWeight(this.stw);
         if (dstrd == 5 || dstrd == 7 || dstrd == 9) { stroke(this.col); strokeWeight(dstrd); }
         else if (dstrd == 2 || dstrd == 6) { stroke(this.col + '85'); }
@@ -438,6 +439,7 @@ class LineMove {
                 line(0, 0, this.l, 0)
             } else if (this.nl < 8) {
                 line(0, 0, this.l, 0)
+                line(0, -this.l, 0, 0);
             } else if (this.nl < 9) {
                 line(0, 0, this.l, 0)
             } else {
@@ -453,12 +455,12 @@ class LineMove {
                 else {line(0, -this.w, 0, 0, )}
             }
         } else if (rdmFm1 == 2) {
-            if (this.nl < 7) {
+            if (this.nl < 5) {
                 line(0, 0, this.l, 0)
-            } else if (this.nl < 8) {
+            } else if (this.nl < 9) {
                 line(0, 0, this.l, 0)
                 line(0, -this.l, 0, 0);
-            } else if (this.nl < 9) {
+            } else if (this.nl < 10) {
                 if (this.rdarc == 1) {
                     noFill();
                     arc(0, 0, -this.w * 2, this.w * 2, 0, PI / 2);
@@ -476,6 +478,7 @@ class LineMove {
                 line(0, 0, -this.l, 0)
             } else if (this.nl < 8) {
                 line(0, 0, this.l, 0)
+                line(0, -this.l, 0, 0);
             } else if (this.nl < 9) {
                 line(0, -this.w, this.w, 0);
             } else {
@@ -506,7 +509,8 @@ class LineMove {
 
 	init() {
 		this.t = -0.5;
-		this.rnd = int(random(20));
+        this.rnd = int(random(20));
+        this.rnd2 = int(random(10));
 		this.step = 1 / vspeed;
 		this.a0 = this.a;
 		this.a1 = int(random(4)) * PI * 0.5;
