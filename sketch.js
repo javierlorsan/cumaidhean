@@ -6,7 +6,7 @@ let colors7 = ["#F23D91", "#F079F2", "#5F72D9", "#83A603", "#F22727", "#F241A3",
 let colors4 = ["#BFCAD5", "#dee2e6", "#ced4da", "#adb5bd", "#6c757d", "#d4d700", "#9ef01a", "#C7EC8C", "#F6F905", "#9FA2A5", "#CBCFD3", "#280459"]; //blue/gray
 let colors5 = ["#f94144", "#f3722c", "#f8961e", "#f9c74f", "#90be6d", "#43aa8b", "#577590", "#D43739", "#FD5A01", "#D37604", "#3F6B1D", "#3C5911" ]; // Multicol
 let colors6 = ["#d8f3dc", "#b7e4c7", "#95d5b2", "#74c69d", "#52b788", "#40916c", "#2d6a4f", "#0C6A40", "#5A9077", "#5FD49D", "#95C6AE", "#83A603"]; // green
-let fondo = ["#D0A519", "#C2C5AA", "#8BBCBD", "#CDB4DB", "#D8F3DC", "#FD8A03", "#883E03", "#936639", "#4361ee", "#3a0ca3", "#F8C9DA", "#9d4edd", "#F992A5", "#dab6fc", "#DFAB8F", "#fdffb6", "#e5dcc5", "#ffffff", "#A6B996", "#4C3033", "#E7C02C", "#0B682D", "#20C282", "#506431", "#F6F4F2", "#8F7791", "#B2C12B", "#EBDEA3"];
+let fondo = ["#D0A519", "#C2C5AA", "#8BBCBD", "#CDB4DB", "#D8F3DC", "#FD8A03", "#883E03", "#936639", "#4361ee", "#3a0ca3", "#F8C9DA", "#9d4edd", "#F992A5", "#dab6fc", "#DFAB8F", "#fdffb6", "#e5dcc5", "#ffffff", "#A6B996", "#4C3033", "#E7C02C", "#0B682D", "#20C282", "#506431", "#F6F4F2", "#8F7791", "#B2C12B", "#EBDEA3"];//background
 let paleta = [colors, colors1, colors2, colors3, colors4, colors5, colors6, colors7];
 let pltcols = colors.concat(colors1, colors2, colors3, colors4, colors5, colors6, colors7)
 let WIDTH = window.innerWidth;
@@ -17,7 +17,6 @@ let tokenData = genTokenData(633);
 //tokenData.hash = '0x9ca74294e3c52ab7bd0eb33911413dc7a26ea95616af22a7b4409e5424fccbb7';
 let tkid = tokenData.tokenId;
 let seed = parseInt(tokenData.hash.slice(0, 16), 16)
-console.log(tokenData.hash);
 let rdtc1, R, fg, forms = [], bgCol, wid, gCol1 = '', gCol2 = '', vspeed = 45, Arrcol = [], cols1 = [], cols2 = [], rdrectri;
 let prc = ((DIM - 650) / 650) * 100;
 let rdln;
@@ -25,9 +24,7 @@ let rdln;
 function setup() {
     createCanvas(DIM, DIM);
     prc = floor(prc);
-    //console.log(prc);
     R = new Random(seed)
-    R1 = new Random(seed)
     translate(WIDTH / 2, HEIGHT / 2);
     translate(-WIDTH / 2, -HEIGHT / 2);
     pixelDensity(1);
@@ -75,6 +72,8 @@ function init() {
 function addForms2() {
 
     let cols = R.random_int(12, 17), rows = cols, cellW = DIM / cols, cellH = DIM / rows, dst;
+
+    if (cols >= 15) { vspeed = 30; }
 
     if (tkid % 2 == 0) paleta.reverse();
 
@@ -146,7 +145,7 @@ class LineMove2 {
         this.x = x;
         this.y = y;
         this.w = w;
-        this.a = R.random_int(0,4) * PI * 0.5;
+        this.a = R.random_int(0, 4) * PI * 0.5;
         this.l = this.w;
         this.init();
         this.col = col;
@@ -168,7 +167,6 @@ class LineMove2 {
                 line(0, 0, this.l, 0)
             } else if (this.nl < 7) {
                 line(0, 0, this.l, 0)
-                //line(0, -this.l, 0, 0);
             } else if (this.nl < 8) {
                 line(0, 0, this.w, 0)
                 line(this.w, -this.w, this.w, 0);
@@ -428,7 +426,6 @@ class LineMove {
         push();
         translate(this.x, this.y, this.w);
         rotate(this.a);
-        //if (this.t > 0) {if (this.rnd2 == 0) translate(this.l, 0);}
         strokeWeight(this.stw);
         if (dstrd == 5 || dstrd == 7 || dstrd == 9) { stroke(this.col); strokeWeight(dstrd); }
         else if (dstrd == 2 || dstrd == 6) { stroke(this.col + '85'); }
